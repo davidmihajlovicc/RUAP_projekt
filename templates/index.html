@@ -1,38 +1,52 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Air Quality (3-class) – Local Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Air Quality Predictor</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body>
-  <div class="card">
-    <h1>Air quality prediction</h1>
+  <main class="card" role="main">
+    <header style="margin-bottom: 14px;">
+      <h1>Air quality prediction</h1>
+    </header>
 
     {% if error %}
-      <div class="alert alert-error">{{ error }}</div>
+      <div class="alert alert-error" role="alert">{{ error }}</div>
     {% endif %}
 
     {% if prediction is defined %}
-      <div class="alert alert-ok">
+      <div class="alert alert-ok" role="status">
         Prediction: <b>{{ prediction }}</b>
-        {% if proba %}
-          <pre>{{ proba }}</pre>
-        {% endif %}
       </div>
     {% endif %}
 
-    <form method="post" action="/predict">
-      {% for f in features %}
-        <label>{{ f }}</label>
-        <input name="{{ f }}" type="number" step="any" required />
-      {% endfor %}
+    <form method="post" action="/predict" autocomplete="off">
+      <section class="form-grid" aria-label="Input features">
+        {% for f in features %}
+          {% set fid = "f_" ~ loop.index %}
+          <div class="field">
+            <label for="{{ fid }}">{{ f }}</label>
+            <input
+              id="{{ fid }}"
+              name="{{ f }}"
+              type="number"
+              step="any"
+              required
+              placeholder="e.g. 0.0"
+              inputmode="decimal"
+            />
+          </div>
+        {% endfor %}
+      </section>
+
       <button type="submit">Predict</button>
     </form>
 
-    <hr />
+    <hr class="divider" />
 
-    <p>JSON API: POST <code>/api/predict</code> with <code>{"data": {...}}</code></p>
-  </div>
+  </main>
 </body>
 </html>

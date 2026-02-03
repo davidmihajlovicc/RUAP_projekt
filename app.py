@@ -36,12 +36,7 @@ def predict_one(features_dict):
 
     y = model.predict(df)[0]
 
-    proba = None
-    if hasattr(model, "predict_proba"):
-        p = model.predict_proba(df)[0]
-        proba = {str(cls): float(p[i]) for i, cls in enumerate(model.classes_)}
-
-    return y, proba
+    return y
 
 @app.get("/")
 def index():
@@ -51,8 +46,8 @@ def index():
 def predict_form():
 
     try:
-        y, proba = predict_one(request.form)
-        return render_template("index.html", features=FEATURES, prediction=y, proba=proba)
+        y = predict_one(request.form)
+        return render_template("index.html", features=FEATURES, prediction=y)
     except Exception as e:
         return render_template("index.html", features=FEATURES, error=str(e)), 400
 
@@ -62,8 +57,8 @@ def predict_api():
     x = payload.get("data", payload)
 
     try:
-        y, proba = predict_one(x)
-        return jsonify({"prediction": str(y), "proba": proba})
+        y = predict_one(x)
+        return jsonify({"prediction": str(y)})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
