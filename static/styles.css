@@ -1,0 +1,9 @@
+body { font-family: Arial, sans-serif; background:#f6f7fb; }
+.card { max-width: 720px; margin: 40px auto; background:#fff; padding: 24px; border-radius: 10px; }
+label { display:block; margin-top: 12px; font-weight: 600; }
+input { width:100%; padding:10px; margin-top:6px; }
+button { margin-top: 18px; padding: 10px 14px; }
+.alert { padding: 10px; border-radius: 8px; margin: 12px 0; }
+.alert-error { background:#ffe7e7; }
+.alert-ok { background:#e9ffe7; }
+pre { background:#f1f1f1; padding:10px; border-radius:8px; overflow:auto; }

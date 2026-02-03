@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Air Quality (3-class) – Local Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="card">
+    <h1>Air quality prediction</h1>
+
+    {% if error %}
+      <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+
+    {% if prediction is defined %}
+      <div class="alert alert-ok">
+        Prediction: <b>{{ prediction }}</b>
+        {% if proba %}
+          <pre>{{ proba }}</pre>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <form method="post" action="/predict">
+      {% for f in features %}
+        <label>{{ f }}</label>
+        <input name="{{ f }}" type="number" step="any" required />
+      {% endfor %}
+      <button type="submit">Predict</button>
+    </form>
+
+    <hr />
+
+    <p>JSON API: POST <code>/api/predict</code> with <code>{"data": {...}}</code></p>
+  </div>
+</body>
+</html>
