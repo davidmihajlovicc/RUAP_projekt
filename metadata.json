@@ -1,0 +1,10 @@
+{
+  "target_definition": "NO2(GT) terciles: Good <= 89.000, Moderate <= 127.000, Bad > 127.000",
+  "target_column": "NO2(GT)",
+  "classes": [
+    "Good",
+    "Moderate",
+    "Bad"
+  ],
+  "best_model": "RandomForest"
+}

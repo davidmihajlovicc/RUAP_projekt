@@ -1,0 +1,12 @@
+name: airq-infer
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - azureml-inference-server-http
+      - numpy
+      - pandas
+      - scikit-learn
+      - joblib
